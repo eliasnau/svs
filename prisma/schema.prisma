@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// Define your data model
+
+model User {
+  id               String        @id @default(auto()) @map("_id") @db.ObjectId
+  firstname        String?
+  lastname         String?
+  email            String?       @unique
+  hashedPassword   String?
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  logins           Login[]
+}
+
+model Login {
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId   String    @db.ObjectId
+  ip         String
+  device     String
+  browser    String
+  cookie     String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  // Foreign key relationship with User model
+  user       User     @relation(fields: [userId], references: [id])
+}
+
+model Post{
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  user String
+  songs String[]
+  other String
+}
