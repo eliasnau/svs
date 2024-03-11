@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import prisma from "@/app/libs/prismadb";
 import { SHA256 } from "crypto-js";
 
-export async function POST(request: NextResponse) {
+export async function POST(request: Request) {
   try {
     // Input validation using guard clauses
     const body = await request.json();

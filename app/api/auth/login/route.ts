@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 import crypto from "crypto";
 import prisma from "@/app/libs/prismadb";
 
-export async function POST(request: NextResponse) {
+export async function POST(request: Request) {
   try {
     // Extract data from the request body
     const body = await request.json();
