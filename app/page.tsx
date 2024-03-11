@@ -17,7 +17,7 @@ export default function Home() {
         <CardHeader>
           <CardTitle>Song Einreichen</CardTitle>
           <CardDescription>
-            Gib die Songs an, die beim Springen laufen sollen
+            Gib die Songs an, die während du springst laufen sollen
           </CardDescription>
         </CardHeader>
         <CardContent>
