@@ -14,9 +14,17 @@ export async function POST(request: Request) {
     }
 
     const hashedAuthorization = auth;
-    const authorizationKey = SHA256(process.env.PASSWORD).toString();
 
-    if (!(hashedAuthorization === authorizationKey)) {
+    const authorizationKey = process.env.PASSWORD;
+
+    if (!authorizationKey) {
+      console.error("No Password set in env");
+      return new NextResponse("Internal Server Error", { status: 500 });
+    }
+
+    const hashedAuthorizationKey = SHA256(authorizationKey).toString();
+
+    if (!(hashedAuthorization === hashedAuthorizationKey)) {
       return new NextResponse("Forbidden", { status: 403 });
     }
 
